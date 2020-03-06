@@ -5,7 +5,7 @@ const lyricChangeReducer = (state = initialState.songsById, action) => {
   let newSongsByIdEntry;
   let newSongsByIdStateSlice;
   switch (action.type) {
-  case types.NEXT_LYRIC:
+    case types.NEXT_LYRIC:
     const newArrayPosition = state[action.currentSongId].arrayPosition + 1;
     newSongsByIdEntry = Object.assign({}, state[action.currentSongId], {
       arrayPosition: newArrayPosition
@@ -14,7 +14,7 @@ const lyricChangeReducer = (state = initialState.songsById, action) => {
       [action.currentSongId]: newSongsByIdEntry
     });
     return newSongsByIdStateSlice;
-  case types.RESTART_SONG:
+    case types.RESTART_SONG:
     newSongsByIdEntry = Object.assign({}, state[action.currentSongId], {
       arrayPosition: 0
     });
@@ -22,7 +22,18 @@ const lyricChangeReducer = (state = initialState.songsById, action) => {
       [action.currentSongId]: newSongsByIdEntry
     });
     return newSongsByIdStateSlice;
-  default:
+    case types.REQUEST_SONG:
+    newSongsByIdEntry = {
+      isFetching: true,
+      title: action.title,
+      songId: action.songId
+    };
+    newSongsByIdStateSlice = Object.assign({}, state, {
+      [action.songId]: newSongsByIdEntry
+    });
+    return newSongsByIdStateSlice;
+
+    default:
     return state;
   }
 };

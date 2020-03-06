@@ -1,6 +1,9 @@
 import React from 'react';
+import { fetchSongId } from './../actions';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-function SongSearch(){
+function SongSearch({ dispatch }){
   let input;
   return (
     <div>
@@ -9,7 +12,7 @@ function SongSearch(){
         if (!input.value.trim()) {
           return;
         }
-        // ...we'll add more custom logic here later...
+      dispatch(fetchSongId(input.value.trim()));
         console.log('SEARCHED ARTIST:');
         console.log(input.value.trim());
         //...instead of these console.log()s....
@@ -23,5 +26,7 @@ function SongSearch(){
     </div>
   );
 }
-
-export default SongSearch;
+SongSearch.propTypes = {
+  dispatch: PropTypes.func
+};
+export default connect()(SongSearch);
