@@ -35,7 +35,7 @@ export function fetchSongId(title) {
         fetchLyrics(title, artist, musicMatchId, localSongId, dispatch);
       } else {
         console.log('We couldn\'t locate a song under that ID!');
-      }
+      } 
     });
   };
 }
