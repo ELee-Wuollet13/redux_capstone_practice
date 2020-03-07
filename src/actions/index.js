@@ -1,6 +1,6 @@
 import * as types from "./../constants/ActionTypes";
 import v4 from 'uuid/v4';
-export function fetchSongId(title) {
+
 
 export const nextLyric = (currentSongId) => ({
   type: types.NEXT_LYRIC,
@@ -24,7 +24,7 @@ export function fetchSongId(title) {
     const localSongId = v4();
     dispatch(requestSong(title, localSongId));
     title = title.replace(' ', '_');
-    return fetch('http://api.musixmatch.com/ws/1.1/track.search?&q_track=' + title + '&page_size=1&s_track_rating=desc&apikey=YOUR-API-KEY-HERE').then(
+    return fetch('https://api.musixmatch.com/ws/1.1/track.search?&q_track=' + title + '&page_size=1&s_track_rating=desc&apikey=e1954d3468ed4493c255a62c40ddcc1f').then(
       response => response.json(),
       error => console.log('An error occurred.', error)
     ).then(function(json) {

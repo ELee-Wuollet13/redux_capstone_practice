@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { restartSong } from './../actions';
+import { changeSong } from './../actions';
 
 const SongList = ({ dispatch, songList }) => {
   let action;
