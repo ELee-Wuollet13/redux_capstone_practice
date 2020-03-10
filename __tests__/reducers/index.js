@@ -1,5 +1,5 @@
 import constants from "./../../src/constants";
-import songChangeReducer from './../../src/reducers/songChangeReducer';
+import suitChangeReducer from './../../src/reducers/suitChangeReducer';
 import lyricChangeReducer from './../../src/reducers/lyricChangeReducer';
 import rootReducer from './../../src/reducers/';
 import { createStore } from 'redux';
@@ -11,58 +11,58 @@ describe('Karaoke App', () => {
 
   describe('lyricChangeReducer', () => {
     it('Should accept and return initial state.', () => {
-      expect(lyricChangeReducer(initialState.songsById, { type: null })).toEqual(initialState.songsById);
+      expect(lyricChangeReducer(initialState.suitsById, { type: null })).toEqual(initialState.suitsById);
     });
-    it('Should update currently-displayed lyric of song', () => {
-      expect(lyricChangeReducer(initialState.songsById, actions.nextLyric(2))[2].arrayPosition).toEqual(initialState.songsById[2].arrayPosition + 1);
+    it('Should update currently-displayed lyric of suit', () => {
+      expect(lyricChangeReducer(initialState.suitsById, actions.nextLyric(2))[2].arrayPosition).toEqual(initialState.suitsById[2].arrayPosition + 1);
     });
-    it('Should update currently-displayed lyric of song', () => {
-      expect(lyricChangeReducer(initialState.songsById, { type: 'NEXT_LYRIC', currentSongId: 2 })[2].arrayPosition).toEqual(initialState.songsById[2].arrayPosition + 1);
+    it('Should update currently-displayed lyric of suit', () => {
+      expect(lyricChangeReducer(initialState.suitsById, { type: 'NEXT_LYRIC', currentSuitId: 2 })[2].arrayPosition).toEqual(initialState.suitsById[2].arrayPosition + 1);
     });
 
-    it('Should restart song', () => {
-      expect(lyricChangeReducer(initialState.songsById, { type: 'RESTART_SONG', currentSongId: 1 })[1].arrayPosition).toEqual(0);
+    it('Should restart suit', () => {
+      expect(lyricChangeReducer(initialState.suitsById, { type: 'RESTART_SUIT', currentSuitId: 1 })[1].arrayPosition).toEqual(0);
     });
-    it('Should restart song', () => {
-      expect(lyricChangeReducer(initialState.songsById, actions.restartSong(1))[1].arrayPosition).toEqual(0);
+    it('Should restart suit', () => {
+      expect(lyricChangeReducer(initialState.suitsById, actions.restartSuit(1))[1].arrayPosition).toEqual(0);
     });
     it('Should update state when API lyrics are being requested.', () => {
-      const action = actions.requestSong('crocodile rock');
+      const action = actions.requestSuit('crocodile rock');
       const newStateEntry = {
         isFetching: true,
         title: action.title,
-        songId: action.songId,
+        suitId: action.suitId,
       };
-      expect(lyricChangeReducer(initialState.songsById, action)[action.songId])
+      expect(lyricChangeReducer(initialState.suitsById, action)[action.suitId])
       .toEqual(newStateEntry);
-      it('Update state on receive song', () => {
-        const action = actions.receiveSong('kiss', 'prince', 1, ['you don\'t have to be beautiful', 'to turn me on']);
+      it('Update state on receive suit', () => {
+        const action = actions.receiveSuit('kiss', 'prince', 1, ['you don\'t have to be beautiful', 'to turn me on']);
         const newObject = {
           isFetching: false,
           title: action.title,
           artist: action.artist,
-          songId: action.songId,
+          suitId: action.suitId,
           receivedAt: action.receivedAt,
-          songArray: action.songArray,
+          suitArray: action.suitArray,
           arrayPosition: 0
         };
-        expect(lyricChangeReducer(initialState.songsById, action)[action.songId])
+        expect(lyricChangeReducer(initialState.suitsById, action)[action.suitId])
         .toEqual(newObject);
       });
     });
 
   });
 
-  describe('songChangeReducer', () => {
+  describe('suitChangeReducer', () => {
     it('Should accept and return initial state.', () => {
-      expect(songChangeReducer(initialState, { type: null })).toEqual(initialState);
+      expect(suitChangeReducer(initialState, { type: null })).toEqual(initialState);
     });
 
-    it('Should change selectedSong.', () => {
-      expect(songChangeReducer(initialState, { type: 'CHANGE_SONG', newSelectedSongId: 1 })).toEqual(1);
+    it('Should change selectedSuit.', () => {
+      expect(suitChangeReducer(initialState, { type: 'CHANGE_SUIT', newSelectedSuitId: 1 })).toEqual(1);
     });
-    it('Should change selectedSong.', () => {
-      expect(songChangeReducer(initialState.currentSongId, actions.changeSong(2))).toEqual(2);
+    it('Should change selectedSuit.', () => {
+      expect(suitChangeReducer(initialState.currentSuitId, actions.changeSuit(2))).toEqual(2);
     });
   });
 
@@ -72,8 +72,8 @@ describe('Karaoke App', () => {
     });
 
     it('Should contain logic from both reducers.', () => {
-      expect(store.getState().currentSongId).toEqual(songChangeReducer(undefined, { type: null }));
-      expect(store.getState().songsById).toEqual(lyricChangeReducer(undefined, { type: null }));
+      expect(store.getState().currentSuitId).toEqual(suitChangeReducer(undefined, { type: null }));
+      expect(store.getState().suitsById).toEqual(lyricChangeReducer(undefined, { type: null }));
     });
   });
 

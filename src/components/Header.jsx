@@ -1,12 +1,12 @@
 import React from 'react';
-import SongSearch from './SongSearch';
+import SuitSearch from './SuitSearch';
 
 function Header(){
   return (
     <div>
       <h1>Singer</h1>
-      <em>Search for a song:</em>
-      <SongSearch />
+      <em>Search for a suit:</em>
+      <SuitSearch />
     </div>
   );
 }

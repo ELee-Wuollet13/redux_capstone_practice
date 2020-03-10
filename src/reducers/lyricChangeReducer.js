@@ -1,55 +1,55 @@
 import constants from './../constants';
 const { initialState, types } = constants;
 
-const lyricChangeReducer = (state = initialState.songsById, action) => {
-  let newSongsByIdEntry;
-  let newSongsByIdStateSlice;
+const lyricChangeReducer = (state = initialState.suitsById, action) => {
+  let newSuitsByIdEntry;
+  let newSuitsByIdStateSlice;
   switch (action.type) {
 
     case types.NEXT_LYRIC:
-    const newArrayPosition = state[action.currentSongId].arrayPosition + 1;
-    newSongsByIdEntry = Object.assign({}, state[action.currentSongId], {
+    const newArrayPosition = state[action.currentSuitId].arrayPosition + 1;
+    newSuitsByIdEntry = Object.assign({}, state[action.currentSuitId], {
       arrayPosition: newArrayPosition
     });
-    newSongsByIdStateSlice = Object.assign({}, state, {
-      [action.currentSongId]: newSongsByIdEntry
+    newSuitsByIdStateSlice = Object.assign({}, state, {
+      [action.currentSuitId]: newSuitsByIdEntry
     });
-    return newSongsByIdStateSlice;
+    return newSuitsByIdStateSlice;
 
-    case types.RESTART_SONG:
-    newSongsByIdEntry = Object.assign({}, state[action.currentSongId], {
+    case types.RESTART_SUIT:
+    newSuitsByIdEntry = Object.assign({}, state[action.currentSuitId], {
       arrayPosition: 0
     });
-    newSongsByIdStateSlice = Object.assign({}, state, {
-      [action.currentSongId]: newSongsByIdEntry
+    newSuitsByIdStateSlice = Object.assign({}, state, {
+      [action.currentSuitId]: newSuitsByIdEntry
     });
-    return newSongsByIdStateSlice;
+    return newSuitsByIdStateSlice;
 
-    case types.REQUEST_SONG:
-    newSongsByIdEntry = {
+    case types.REQUEST_SUIT:
+    newSuitsByIdEntry = {
       isFetching: true,
       title: action.title,
-      songId: action.songId
+      suitId: action.suitId
     };
-    newSongsByIdStateSlice = Object.assign({}, state, {
-      [action.songId]: newSongsByIdEntry
+    newSuitsByIdStateSlice = Object.assign({}, state, {
+      [action.suitId]: newSuitsByIdEntry
     });
-    return newSongsByIdStateSlice;
+    return newSuitsByIdStateSlice;
 
-    case types.RECEIVE_SONG:
-  newSongsByIdEntry = Object.assign({}, state[action.songId], {
+    case types.RECEIVE_SUIT:
+  newSuitsByIdEntry = Object.assign({}, state[action.suitId], {
     isFetching: false,
     receivedAt: action.receivedAt,
     title: action.title,
     artist: action.artist,
-    songArray: action.songArray,
+    suitArray: action.suitArray,
     arrayPosition: 0,
-    songId: action.songId
+    suitId: action.suitId
   });
-  newSongsByIdStateSlice = Object.assign({}, state, {
-    [action.songId]: newSongsByIdEntry
+  newSuitsByIdStateSlice = Object.assign({}, state, {
+    [action.suitId]: newSuitsByIdEntry
   });
-  return newSongsByIdStateSlice;
+  return newSuitsByIdStateSlice;
 
     default:
     return state;

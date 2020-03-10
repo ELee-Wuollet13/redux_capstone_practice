@@ -1,6 +1,6 @@
 import React from 'react';
-import SongDisplay from './SongDisplay';
-import SongList from './SongList';
+import SuitDisplay from './SuitDisplay';
+import SuitList from './SuitList';
 import Header from './Header';
 
 function App(){
@@ -8,9 +8,9 @@ function App(){
     <div>
       <Header />
       <br/>
-      <SongList />
+      <SuitList />
       <hr/>
-      <SongDisplay />
+      <SuitDisplay />
     </div>
   );
 }

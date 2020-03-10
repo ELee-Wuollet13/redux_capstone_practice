@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import songChangeReducer from './songChangeReducer';
+import suitChangeReducer from './suitChangeReducer';
 import lyricChangeReducer from './lyricChangeReducer';
 
 const rootReducer = combineReducers({
-  currentSongId: songChangeReducer,
-  songsById: lyricChangeReducer
+  currentSuitId: suitChangeReducer,
+  suitsById: lyricChangeReducer
 });
 
 export default rootReducer;
